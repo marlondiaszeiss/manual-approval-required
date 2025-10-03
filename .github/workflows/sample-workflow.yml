@@ -12,20 +12,20 @@ jobs:
     steps:
       - name: "Build job"
         run: echo "This is the BUILD job"
-  deploy:
+  approve:
     needs: build
     environment: approval-gate
     runs-on: ubuntu-latest
     steps:
-      - name: "Deploy job"
-        run: echo "This is the DEPLOY job - needs approval"
-  post-deploy:
-    needs: deploy
-    environment: build
+      - name: "Review and Approve"
+        run: echo "Here you REVIEW the job so far - if you approve it, the next job will run"
+  deploy:
+    needs: approve
+    environment: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: "Post-build job"
-        run: echo "This is the POST-BUILD job"
+      - name: "Deploy job"
+        run: echo "Here is where the DEPLOY happens."
 
         
 
